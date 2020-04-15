@@ -6,23 +6,11 @@ I'm a highschool junior who writes software for fun. I enjoy anime, open source,
 
 Most of my stuff is stored back on Scratch, but I do make projects outside of it. Have a looksies!
 
-```markdown
-Syntax highlighted code block
+### Yoom! Open-Source Internet Messenger and Social Media Platform
 
-# Header 1
-## Header 2
-### Header 3
+This is a Scratch 3.0-powered open source IM and SMP. Powered by Ngrok, Sheeptester's primative cloud server and HTMLifier.
+Try it out [here.](https://mikedev101.github.io/yoom)
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
 
 ### Contact me!
 
