@@ -22,3 +22,7 @@ Powered by Ngrok and Sheeptester's Primative Cloud Server. Those only provide th
 Yoom has a translator (powered by Google Translate), word filter, ~~DM system, Global Chat, and a mailbox (kinda like e-mail)~~ _these features are a work-in-progress, though._
 
 Yoom also has a remote-access feature (only available for moderators), user account creation, temp. and perm. bans.s
+
+# Run Yoom Beta in your browser
+
+To run Yoom, you'll need to host a local webserver. Install Npm onto your system, and download and extract the servertools.zip file. Open the extracted directory and run "npm start".
