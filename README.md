@@ -1,12 +1,10 @@
-## Welcome to GitHub Pages
+## Welcome to my website!
 
-You can use the [editor on GitHub](https://github.com/MikeDev101/mikedev101.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+I'm a highschool junior who writes software for fun. I enjoy anime, open source, memes, and more. Oh, and I'm a total noob when it comes to github, sorry ;-;
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### My stuff
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Most of my stuff is stored back on Scratch, but I do make projects outside of it. Have a looksies!
 
 ```markdown
 Syntax highlighted code block
@@ -26,12 +24,6 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Contact me!
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/MikeDev101/mikedev101.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+To get in contact, feel free to shoot me an email at mikierules109@gmail.com.
