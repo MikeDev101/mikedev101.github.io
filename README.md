@@ -10,4 +10,4 @@ Here are a few of my latest projects.
 
 **[Project Yoom!](https://mikedev101.github.io/Yoom/index.html)**
 
-**[RaspbianX](https://mikedev101.github.io/RaspbianX)**
+**[RaspbianX](https://mikedev101.github.io/RaspbianX/)**
