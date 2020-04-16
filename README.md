@@ -9,7 +9,7 @@ Most of my stuff is stored back on Scratch, but I do make projects outside of it
 ### Yoom! Open-Source Internet Messenger and Social Media Platform
 
 This is a Scratch 3.0-powered open source IM and SMP. Powered by Ngrok, Sheeptester's primative cloud server and HTMLifier.
-Try it out [here.](https://mikedev101.github.io/yoom)
+Try it out [here.](https://mikedev101.github.io/Yoom)
 
 
 ### Contact me!
