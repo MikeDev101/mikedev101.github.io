@@ -13,23 +13,27 @@ class mdCloudLink {
         {
           opcode: 'hi',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'Hi'
+          arguments: [
+            A: {
+              type: Scratch.ArgumentType.STRING,
+              defaultvalue: 'OwO',
+            }
+          ],
+          text: 'Hi! [A]'
         },
         {
           opcode: 'testhat',
           blockType: Scratch.BlockType.HAT,
-          arguments: [
-            A: {
-              type: ArgumentType.STRING
-            }
-          ],
-          text: 'Test! [A]'
+          text: 'Test!'
         }
       ]
     }
   }
-  hi() {
-    return 'Hello!';
+  hi({text}) {
+    return text;
+  }
+  testhat(){
+    return this.write(`M0 \n`);
   }
 }
 
