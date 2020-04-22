@@ -29,8 +29,8 @@ class mdCloudLink {
       ]
     }
   }
-  hi({text}) {
-    return text;
+  hi({A}) {
+    return A;
   }
   testhat(){
     return this.write(`M0 \n`);
