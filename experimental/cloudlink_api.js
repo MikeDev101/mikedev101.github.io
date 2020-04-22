@@ -1,129 +1,288 @@
-const ArgumentType = Scratch.ArgumentType;
-const BlockType = Scratch.BlockType;
-const formatMessage = Scratch.formatMessage;
-const log = Scratch.log;
+const icon = null;
 
-const menuIconURI = null;
-const blockIconURI = null;
+class mdCloudLink {
 
-class mdCloudLink{
-  constructor (runtime){
-    this.runtime = runtime;
-    // communication related
-    this.comm = runtime.ioDevices.comm;
-    this.session = null;
-    this.runtime.registerPeripheralExtension('mdCloudLink', this);
-    // session callbacks
-    this.reporter = null;
-    this.onmessage = this.onmessage.bind(this);
-    this.onclose = this.onclose.bind(this);
-    this.write = this.write.bind(this);
-    // string op
-    this.decoder = new TextDecoder();
-    this.lineBuffer = '';
-  }
+  constructor() {}
 
-  onclose (){
-    this.session = null;
-  }
-
-  write (data, parser = null){
-    if (this.session){
-      return new Promise(resolve => {
-        if (parser){
-          this.reporter = {
-            parser,
-            resolve
-          }
-        }
-        this.session.write(data);
-      })
-    }
-  }
-
-  onmessage (data){
-    const dataStr = this.decoder.decode(data);
-    this.lineBuffer += dataStr;
-    if (this.lineBuffer.indexOf('\n') !== -1){
-      const lines = this.lineBuffer.split('\n');
-      this.lineBuffer = lines.pop();
-      for (const l of lines){
-        if (this.reporter){
-          const {parser, resolve} = this.reporter;
-          resolve(parser(l));
-        };
-      }
-    }
-  }
-
-  scan (){
-    this.comm.getDeviceList().then(result => {
-        this.runtime.emit(this.runtime.constructor.PERIPHERAL_LIST_UPDATE, result);
-    });
-  }
-
-  getInfo (){
+  getInfo() {
     return {
       id: 'mdCloudLink',
       name: 'CloudLink API',
+
       color1: '#00daee',
       color2: '#00daee',
-      menuIconURI: menuIconURI,
-      blockIconURI: blockIconURI,
+      color3: '#00daee',
+
+      menuIconURI: icon,
+
       blocks: [
         {
-          opcode: 'ping',
-          blockType: BlockType.BOOLEAN,
+          opcode: 'isExactly',
+
+          blockType: Scratch.BlockType.BOOLEAN,
+
+          text: 'is [A] exactly [B]?',
           arguments: {
-            IP: {
-              type: ArgumentType.STRING
+            A: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'apple'
             },
-            TIME: {
-              type: ArgumentType.STRING
+            B: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'APPLE'
             }
-          },
-          text: 'Ping IP [IP] and wait up to [TIME] seconds'
+          }
         },
         {
-          opcode: 'gotPing',
-          blockType: BlockType.HAT,
-          isEdgeActivated: false,
-          text: 'When I receive a ping from anyone'
-        },
-        {
-          opcode: 'getPingSpecific',
-          blockType: BlockType.HAT,
-          isEdgeActivated: false,
+          opcode: 'isLessOrEqual',
+
+          blockType: Scratch.BlockType.BOOLEAN,
+
+          text: '[A] <= [B]',
           arguments: {
-            IP: {
-              type: ArgumentType.STRING
+            A: {
+              type: Scratch.ArgumentType.NUMBER
+            },
+            B: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 50
             }
-          },
-          text: 'When I receive a ping from IP [IP]'
+          }
+        },
+        {
+          opcode: 'isMoreOrEqual',
+
+          blockType: Scratch.BlockType.BOOLEAN,
+
+          text: '[A] >= [B]',
+          arguments: {
+            A: {
+              type: Scratch.ArgumentType.NUMBER
+            },
+            B: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 50
+            }
+          }
+        },
+        {
+          opcode: 'trueBlock',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'true'
+        },
+        {
+          opcode: 'falseBlock',
+          blockType: Scratch.BlockType.BOOLEAN,
+          text: 'false'
+        },
+        {
+          opcode: 'exponent',
+
+          blockType: Scratch.BlockType.REPORTER,
+
+          text: '[A] ^ [B]',
+          arguments: {
+            A: {
+              type: Scratch.ArgumentType.NUMBER
+            },
+            B: {
+              type: Scratch.ArgumentType.NUMBER
+            }
+          }
+        },
+        {
+          opcode: 'pi',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'pi'
+        },
+        {
+          opcode: 'ternaryOperator',
+
+          blockType: Scratch.BlockType.REPORTER,
+
+          text: 'if [A] then [B] else [C]',
+          arguments: {
+            A: {
+              type: Scratch.ArgumentType.BOOLEAN
+            },
+            B: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'banana'
+            },
+            C: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'apple'
+            }
+          }
+        },
+        {
+          opcode: 'letters',
+
+          blockType: Scratch.BlockType.REPORTER,
+
+          text: 'letters [START] to [END] of [STRING]',
+          arguments: {
+            START: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 5
+            },
+            END: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 7
+            },
+            STRING: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'red apple'
+            }
+          }
+        },
+        {
+          opcode: 'currentMillisecond',
+          blockType: Scratch.BlockType.REPORTER,
+          text: 'current millisecond'
+        },
+        {
+          opcode: 'fetchFrom',
+
+          blockType: Scratch.BlockType.REPORTER,
+
+          text: 'get content from [URL]',
+          arguments: {
+            URL: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'https://translate-service.scratch.mit.edu/translate?language=eo&text=hello'
+            }
+          }
+        },
+        {
+          opcode: 'parseJSON',
+
+          blockType: Scratch.BlockType.REPORTER,
+
+          text: '[PATH] of [JSON_STRING]',
+          arguments: {
+            PATH: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'fruit/apples'
+            },
+            JSON_STRING: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: '{"fruit": {"apples": 2, "bananas": 3}, "total_fruit": 5}'
+            }
+          }
+        },
+        {
+          opcode: 'stringToBoolean',
+
+          blockType: Scratch.BlockType.BOOLEAN,
+
+          text: '[STRING]',
+          arguments: {
+            STRING: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'true'
+            }
+          }
+        },
+        {
+          opcode: 'regexReplace',
+
+          blockType: Scratch.BlockType.REPORTER,
+
+          text: 'replace [STRING] using the rule [REGEX] with [NEWSTRING]',
+          arguments: {
+            STRING: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'bananas are awesome. i like bananas.'
+            },
+            REGEX: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'banana'
+            },
+            NEWSTRING: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'apple'
+            }
+          }
         }
       ]
     }
   }
 
-ping (args, util){
-  const IP = args.IP;
-  const TIME = args.TIME;
+  isExactly({A, B}) {
+    return A === B;
+  }
 
-  return this.write(`M0 \n`);
+  isLessOrEqual({A, B}) {
+    return A <= B;
+  }
+
+  isMoreOrEqual({A, B}) {
+    return A >= B;
+  }
+
+  trueBlock() {
+    return true;
+  }
+
+  falseBlock() {
+    return false;
+  }
+
+  exponent({A, B}) {
+    return Math.pow(A, B);
+  }
+
+  pi() {
+    return Math.PI;
+  }
+
+  ternaryOperator({A, B, C}) {
+    return A ? B : C;
+  }
+
+  letters({STRING, START, END}) {
+    return STRING.slice(Math.max(1, START) - 1, Math.min(STRING.length, END));
+  }
+
+  currentMillisecond() {
+    return Date.now() % 1000;
+  }
+
+  fetchFrom({URL}) {
+    return fetch(URL).then(res => res.text())
+      .catch(err => '');
+  }
+
+  parseJSON({PATH, JSON_STRING}) {
+    try {
+      const path = PATH.toString().split('/').map(prop => decodeURIComponent(prop));
+      if (path[0] === '') path.splice(0, 1);
+      if (path[path.length - 1] === '') path.splice(-1, 1);
+      let json;
+      try {
+        json = JSON.parse(' ' + JSON_STRING);
+      } catch (e) {
+        return e.message;
+      }
+      path.forEach(prop => json = json[prop]);
+      if (json === null) return 'null';
+      else if (json === undefined) return '';
+      else if (typeof json === 'object') return JSON.stringify(json);
+      else return json.toString();
+    } catch (err) {
+      return '';
+    }
+  }
+
+  stringToBoolean({STRING}) {
+    return STRING;
+  }
+
+  regexReplace({STRING, REGEX, NEWSTRING}) {
+    return STRING.toString().replace(new RegExp(REGEX, 'gi'), NEWSTRING);
+  }
+
 }
 
-gotPing (args, util){
-
-  return this.write(`M0 \n`);
-}
-
-getPingSpecific (args, util){
-  const IP = args.IP;
-
-  return this.write(`M0 \n`);
-}
-
-}
-
-module.exports = mdCloudLink;
 Scratch.extensions.register(new mdCloudLink());
