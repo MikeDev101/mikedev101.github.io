@@ -45,10 +45,10 @@ class pingas {
     return A;
   }
   testHat(){
-    return this.write(`M0 \n`);
+    return;
   }
   testCommand({A}) {
-    return this.write(`M0 \n`);
+    return;
   }
 }
 
