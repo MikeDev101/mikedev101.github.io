@@ -3,7 +3,7 @@ class pingas {
   constructor() {}
   getInfo() {
     return {
-      id: 'Pingas!',
+      id: 'pingas',
       name: 'Pingas! (A useless extension by MikeDEV)',
       color1: '#00daee',
       color2: '#00daee',
