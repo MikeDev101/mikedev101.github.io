@@ -7,7 +7,7 @@ class pingas {
       name: 'Pingas!',
       color1: '#00daee',
       color2: '#00daee',
-      color3: '#00daee',
+      color3: '#00747f',
       menuIconURI: meme,
       blockIconURI: meme,
       blocks: [
