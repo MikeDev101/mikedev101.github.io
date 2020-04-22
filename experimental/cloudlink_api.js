@@ -11,7 +11,7 @@ class mdCloudLink {
       menuIconURI: icon,
       blocks: [
         {
-          opcode: 'hi',
+          opcode: 'testReporter',
           blockType: Scratch.BlockType.REPORTER,
           arguments: {
             A: {
@@ -19,20 +19,34 @@ class mdCloudLink {
               defaultValue: 'Hello, World!'
             }
           },
-          text: 'Hi! [A]'
+          text: 'Test Reporter [A]'
         },
         {
-          opcode: 'testhat',
+          opcode: 'testHat',
           blockType: Scratch.BlockType.HAT,
-          text: 'Test!'
+          text: 'Test hat'
+        },
+        {
+          opcode: 'testCommand',
+          blockType: Scratch.BlockType.COMMAND,
+          text: 'Test Command [A]',
+          arguments: {
+            A: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: 'This is a test.'
+            }
+          }
         }
       ]
     }
   }
-  hi({A}) {
+  testReporter({A}) {
     return A;
   }
-  testhat(){
+  testHat(){
+    return this.write(`M0 \n`);
+  }
+  testCommand({A}) {
     return this.write(`M0 \n`);
   }
 }
