@@ -3,8 +3,8 @@ class mdCloudLink {
   constructor() {}
   getInfo() {
     return {
-      id: 'mdCloudLink',
-      name: 'CloudLink API',
+      id: 'test',
+      name: 'Pingas!',
       color1: '#00daee',
       color2: '#00daee',
       color3: '#00daee',
@@ -16,24 +16,24 @@ class mdCloudLink {
           arguments: {
             A: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'Hello, World!'
+              defaultValue: 'Pingas'
             }
           },
-          text: 'Test Reporter [A]'
+          text: 'Pingas [A]'
         },
         {
           opcode: 'testHat',
           blockType: Scratch.BlockType.HAT,
-          text: 'Test hat'
+          text: 'Pingas'
         },
         {
           opcode: 'testCommand',
           blockType: Scratch.BlockType.COMMAND,
-          text: 'Test Command [A]',
+          text: 'Pingas [A]',
           arguments: {
             A: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'This is a test.'
+              defaultValue: 'Pingas'
             }
           }
         }
@@ -51,4 +51,4 @@ class mdCloudLink {
   }
 }
 
-Scratch.extensions.register(new mdCloudLink());
+Scratch.extensions.register(new test());
