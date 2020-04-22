@@ -14,6 +14,16 @@ class mdCloudLink {
           opcode: 'hi',
           blockType: Scratch.BlockType.REPORTER,
           text: 'Hi'
+        },
+        {
+          opcode: 'testhat',
+          blockType: Scratch.BlockType.HAT,
+          arguments: [
+            A: {
+              type: ArgumentType.STRING
+            }
+          ],
+          text: 'Test! [A]'
         }
       ]
     }
