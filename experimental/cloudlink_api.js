@@ -126,3 +126,4 @@ getPingSpecific (args, util){
 }
 
 module.exports = mdCloudLink;
+Scratch.extensions.register(new mdCloudLink());
