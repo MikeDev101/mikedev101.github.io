@@ -4,7 +4,7 @@ class pingas {
   getInfo() {
     return {
       id: 'pingas',
-      name: 'Pingas! (A useless extension by MikeDEV)',
+      name: 'Pingas! (Useless!)',
       color1: '#00daee',
       color2: '#00daee',
       color3: '#00daee',
