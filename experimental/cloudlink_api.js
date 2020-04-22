@@ -16,7 +16,7 @@ class mdCloudLink {
           arguments: [
             A: {
               type: Scratch.ArgumentType.STRING,
-              defaultvalue: 'OwO',
+              defaultvalue: 'OwO'
             }
           ],
           text: 'Hi! [A]'
