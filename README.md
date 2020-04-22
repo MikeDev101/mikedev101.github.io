@@ -22,6 +22,6 @@ RaspbianX is my custom-built Raspbian Buster Desktop environment for the Raspber
 
 Here is a directory of my Scratch 3 extensions that I've been working on.
 
-**[Pingas!](https://mikedev101.github.io/experimental/pingas.md)**
+**[Pingas!](https://sheeptester.github.io/scratch-gui/?url=https://mikedev101.github.io/experimental/pingas.js)**
 
 Literally a useless plugin. But it serves nicely as the basics I need to write future extensions.
