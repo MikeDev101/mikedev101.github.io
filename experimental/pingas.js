@@ -36,7 +36,12 @@ class pingas {
               type: Scratch.ArgumentType.STRING,
               defaultValue: 'Pingas'
             }
-          }
+         },
+         {
+           opcode: 'testVar',
+           blockType: Scratch.BlockType.REPORTER,
+           text: 'Pingas'
+         }
         }
       ]
     }
@@ -49,6 +54,9 @@ class pingas {
   }
   testCommand({A}) {
     return;
+  }
+  testVar(){
+    return 'Pingas'
   }
 }
 
