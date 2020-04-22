@@ -698,3 +698,5 @@ class Scratch3Speech2TextBlocks {
     }
 }
 module.exports = Scratch3Speech2TextBlocks;
+
+Scratch.extensions.register(new Scratch3Speech2TextBlocks());
