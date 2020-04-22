@@ -13,12 +13,12 @@ class mdCloudLink {
         {
           opcode: 'hi',
           blockType: Scratch.BlockType.REPORTER,
-          arguments: [
+          arguments: {
             A: {
               type: Scratch.ArgumentType.STRING,
               defaultvalue: 'OwO'
             }
-          ],
+          },
           text: 'Hi! [A]'
         },
         {
