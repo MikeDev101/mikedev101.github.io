@@ -1,6 +1,6 @@
 ## Hey there!
 
-I'm a highschool sophomore (upcoming junior!) who writes software for fun. I enjoy anime, all things open-source, memes, and more.
+I'm a highschool junior who writes software for fun. I enjoy anime, all things open-source, memes, and more.
 
 ### My Stuff
 
@@ -12,9 +12,9 @@ Network Engine is a Scratch sb3 sprite that enables basic connectivity features 
 
 **[Project Yoom!](https://mikedev101.github.io/Yoom/index.html)**
 
-Yoom is a WIP messaging platform using Scratch 3.0 technology.
+Yoom is a experimental messaging platform using Scratch 3.0 technology.
 
-**[RaspbianX](https://mikedev101.github.io/RaspbianX/)**
+**[RaspbianX (Discontinued)](https://mikedev101.github.io/RaspbianX/)**
 
 RaspbianX is my custom-built Raspbian Buster Desktop environment for the Raspberry Pi 4, designed to be aesthetically appealing.
 
@@ -26,6 +26,6 @@ Here is a directory of my Scratch 3 extensions that I've been working on.
 
 Literally a useless plugin. But it serves nicely as the basics I need to write future extensions.
 
-**[CloudLink](https://sheeptester.github.io/scratch-gui/?url=https://mikedev101.github.io/cloudlink/cloudlink.js)**
+**[CloudLink API](https://sheeptester.github.io/scratch-gui/?url=https://mikedev101.github.io/cloudlink/cloudlink.js)**
 
-A (work-in-progress) websocket api to enable server-to-client and client-to-server data transfer, designed for low-latency data, massive online multiplayer, advanced chatrooms, etc.
+CloudLink API is a Scratch 3.0 websocket extension to enable server-to-client and client-to-server data transfer, designed for low-latency data, massive online multiplayer, advanced chatrooms, etc.
