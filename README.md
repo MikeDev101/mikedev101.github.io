@@ -6,7 +6,7 @@ I'm a highschool junior who writes software for fun. I enjoy anime, all things o
 
 Here are a few of my latest projects.
 
-**[Duck in a Box](https://mikdev101.github.io/Duck in a Box.html)**
+**[Duck in a Box](https://mikdev101.github.io/Duck_in_a_Box.html)**
 
 Just a cute little animation about a duck who finds one of my boxes.
 
