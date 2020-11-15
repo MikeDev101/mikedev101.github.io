@@ -30,6 +30,6 @@ Here is a directory of my Scratch 3 extensions that I've been working on.
 
 Literally a useless plugin. But it serves nicely as the basics I need to write future extensions.
 
-**[CloudLink API](https://sheeptester.github.io/scratch-gui/?url=https://mikedev101.github.io/cloudlink/cloudlink.js)**
+**[CloudLink API](https://sheeptester.github.io/scratch-gui/?url=https://mikedev101.github.io/cloudlink/index.js)**
 
 CloudLink API is a Scratch 3.0 websocket extension to enable server-to-client and client-to-server data transfer, designed for low-latency data, massive online multiplayer, advanced chatrooms, etc.
