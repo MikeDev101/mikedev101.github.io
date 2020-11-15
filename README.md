@@ -6,10 +6,6 @@ I'm a highschool junior who writes software for fun. I enjoy anime, all things o
 
 Here are a few of my latest projects.
 
-**[Duck in a Box](https://mikdev101.github.io/Duck_in_a_Box.html)**
-
-Just a cute little animation about a duck who finds one of my boxes.
-
 **[Network Engine](https://mikedev101.github.io/Network-Engine/index.html)**
 
 Network Engine is a Scratch sb3 sprite that enables basic connectivity features over a cloud-variable over websocket connection.
