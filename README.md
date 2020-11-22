@@ -2,6 +2,8 @@
 
 I'm a highschool junior who writes software for fun. I enjoy anime, all things open-source, memes, and more.
 
+My [YouTube](https://www.youtube.com/channel/UC7Na210SbmZamLPz4RMZTRg/) page is here.
+
 ### My Stuff
 
 Here are a few of my latest projects.
