@@ -1,6 +1,6 @@
 ## Hey there!
 
-I'm a highschool junior who writes software for fun. I enjoy anime, all things open-source, memes, and more.
+I'm a highschool senior who writes software for fun. I enjoy anime, all things open-source, memes, and more.
 
 * [YouTube](https://www.youtube.com/channel/UC7Na210SbmZamLPz4RMZTRg/)
 * [Reddit](https://www.reddit.com/u/MikeDeveloper101)
