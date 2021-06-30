@@ -2,12 +2,14 @@
 
 I'm a highschool senior who writes software for fun. I enjoy anime, all things open-source, memes, and more.
 
-* [YouTube](https://www.youtube.com/channel/UC7Na210SbmZamLPz4RMZTRg/)
-* [Reddit](https://www.reddit.com/u/MikeDeveloper101) *(Heads up: I do post some mildly mature content. I'd reccommend you follow me if you're 15+.)*
-* [Steam](https://steamcommunity.com/id/MikeDev101/) *(Feel free to join me in Scrap Mechanic or VRChat... that is, if I ever get around to playing VRChat...)*
-* [Twitter](https://twitter.com/MDev101) *(same disclaimer as my reddit)*
-* Discord: MikeDEV#9600 *(I am VERY active here)*
-* Xbox Live: *MikeDev101 (Rarely ever use it, I share this account with my older brother, who has autism... If you chat with him, please be patient.)*
+Platform | Notes
+------------ | -------------
+[YouTube](https://www.youtube.com/channel/UC7Na210SbmZamLPz4RMZTRg/) | I only use this for uploading tutorials and other random schenanegans. I might consider streaming, but my internet is trash.
+[Reddit](https://www.reddit.com/u/MikeDeveloper101) | I only use this to browse through r/Memes, r/PCMasterRace, etc.
+[Steam](https://steamcommunity.com/id/MikeDev101/) | Very active here, feel free to join me on Scrap Mechanic! Then again, my internet is trash.
+[Twitter](https://twitter.com/MDev101) | Mild mature content alert: I wouldn't recommend you following me if you're not 15+.
+Discord | MikeDEV#9600, I will be active on my friend's discord server very often
+Xbox | MikeDev101, I rarely ever use this, and share it with my older, autistic brother. If you encounter him, please be patient. 
 
 ## My Stuff
 
