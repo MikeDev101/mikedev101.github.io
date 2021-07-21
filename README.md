@@ -19,7 +19,7 @@ Here are a few of my latest projects.
 
 A powerful WebSocket extension for Scratch 3.0.
 
-### **[Meower](https://scratch.mit.edu/discuss/topic/426512)**
+### **[Meower](https://scratch.mit.edu/discuss/topic/508318/)**
 
 Meower is an open-source and public domain social media platform project, written using Scratch 3.0, created by Meower Media Co.
 
