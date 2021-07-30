@@ -23,6 +23,8 @@ A powerful WebSocket extension for Scratch 3.0.
 
 Meower is an open-source and public domain social media platform project, written using Scratch 3.0, created by Meower Media Co.
 
+#### NOTE: IF YOU ARE HERE TO DOWNLOAD THE BETA 2 SOURCE CODE: PLEASE CLICK [HERE](https://drive.google.com/u/0/uc?export=download&confirm=ZNA5&id=1nWGnqmrstBbi3yD7vXqB2TSHZhjtym5h)
+
 ### **[Yoom](https://the-yoom-project.github.io/Yoom/)**
 
 An independently hosted fork of Meower, written using Scratch 3.0 and CloudLink.
