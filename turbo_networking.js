@@ -7,6 +7,7 @@ class Networking {
 		this.packet_hat = 0;
 		this.close_hat = 0;
 		this.packet_queue = {};
+		this.link_status = 0;
     }
 
     getInfo () {
@@ -14,6 +15,11 @@ class Networking {
             "id": 'networking',
             "name": 'Networking',
             "blocks": [
+				{
+                	"opcode": 'linkState',
+                    "blockType": "reporter",
+                    "text": 'link state'
+                },
                 {
                 	"opcode": 'getSocketData',
                     "blockType": "reporter",
@@ -144,6 +150,10 @@ class Networking {
         };
     };
 	
+	linkState() {
+		return Number(this.link_status);
+	}
+	
 	getQueueItem(args) {
 		try {
 			return JSON.stringify(this.packet_queue[Number(args.item)]);
@@ -245,17 +255,20 @@ class Networking {
 	}) {
     	if (this.isRunning == false) {
     		console.log("Starting socket.");
+			const self = this; // the functions below are out of the scope
+			self.link_status = 1;
     		this.mWS = new WebSocket(String(ADDRESS));
-
-    		const self = this; // the functions below are out of the scope
+    		
     		//check if connnecting to the server fails
     		this.mWS.onerror = function(){
     			self.isRunning = false;
     			console.log("failed to connect to the server.");
+				self.link_status = 3;
     		};
     		this.mWS.onopen = function(){
     			self.isRunning = true;
 				self.packet_queue = {};
+				self.link_status = 2;
     			console.log("successfully connected to the server.");
     		};
 			this.mWS.onmessage = function(event){
@@ -270,6 +283,7 @@ class Networking {
 				this.connect_hat = 0;
 				this.packet_hat = 0;
 				this.close_hat = 0;
+				this.link_status = 3;
 				console.log("Server has disconnected.");
 			};
     	} else {
@@ -285,6 +299,7 @@ class Networking {
 			this.packet_hat = 0;
 			this.close_hat = 0;
     		this.isRunning = false;
+			this.link_status = 3;
     	} else {
     		console.log("Socket is not open.");
     	};
@@ -299,6 +314,7 @@ class Networking {
 				this.connect_hat = 0;
 				this.packet_hat = 0;
 				this.close_hat = 0;
+				this.link_status = 3;
    				console.log("Server has disconnected.")
    			};
    		};
