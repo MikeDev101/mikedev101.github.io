@@ -2,19 +2,17 @@ class Networking {
     constructor (runtime, extensionId) {
 		this.cl_icon = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS4yLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA0NSA0NSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDUgNDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiMwRkJEOEM7fQ0KCS5zdDF7ZmlsbDpub25lO3N0cm9rZTojRkZGRkZGO3N0cm9rZS13aWR0aDo0O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9DQo8L3N0eWxlPg0KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIxNy41MDAxNCwtMTU3LjUwMDEzKSI+DQoJPGc+DQoJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yMTcuNSwxODBjMC0xMi40LDEwLjEtMjIuNSwyMi41LTIyLjVzMjIuNSwxMC4xLDIyLjUsMjIuNXMtMTAuMSwyMi41LTIyLjUsMjIuNVMyMTcuNSwxOTIuNCwyMTcuNSwxODANCgkJCUwyMTcuNSwxODB6Ii8+DQoJCTxnPg0KCQkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTIzMC4zLDE4MC4xYzUuNy00LjcsMTMuOS00LjcsMTkuNiwwIi8+DQoJCQk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMjI1LjMsMTc1LjFjOC40LTcuNCwyMS03LjQsMjkuNCwwIi8+DQoJCQk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMjM1LjIsMTg1YzIuOS0yLjEsNi44LTIuMSw5LjcsMCIvPg0KCQkJPHBhdGggY2xhc3M9InN0MSIgZD0iTTI0MCwxOTAuNEwyNDAsMTkwLjQiLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjwvc3ZnPg0K';
 		this.cl_block = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS4yLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCA0NSA0NSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDUgNDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOm5vbmU7c3Ryb2tlOiNGRkZGRkY7c3Ryb2tlLXdpZHRoOjQ7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30NCjwvc3R5bGU+DQo8Zz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTIuOCwyMi42YzUuNy00LjcsMTMuOS00LjcsMTkuNiwwIi8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTcuOCwxNy42YzguNC03LjQsMjEtNy40LDI5LjQsMCIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNy43LDI3LjVjMi45LTIuMSw2LjgtMi4xLDkuNywwIi8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTIyLjUsMzIuOUwyMi41LDMyLjkiLz4NCjwvZz4NCjwvc3ZnPg0K';
-        this.isRunning = false;
-        this.socketData = "";
-        this.runtime = runtime;
+		this.isRunning = false;
+		this.socketData = "";
+		this.runtime = runtime;
+
 		this.connect_hat = 0;
 		this.packet_hat = 0;
 		this.close_hat = 0;
-		this.packet_queue = {};
 		this.link_status = 0;
-		this.responded_packet = {};
-		this.got_response = 0;
-		this.listening_for_packet = false;
-		this.listening_packet_cmd = "";
-		this.packet_response_queue_number = 0;
+
+		this.packet_queue = {};
+		this.listening_for_packet = {};
     }
 
     getInfo () {
@@ -167,7 +165,7 @@ class Networking {
 					"arguments": {
 						"CMD": {
 							"type": "string",
-							"defaultValue": 'status',
+							"defaultValue": 'statuscode',
 						},
 					},
                 },
@@ -189,12 +187,24 @@ class Networking {
 				{
                 	"opcode": 'getPacketResponse',
                     "blockType": "reporter",
-                    "text": 'Packet Response'
+                    "text": 'Packet Response for [CMD]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+					},
                 },
 				{
                 	"opcode": 'getPacketResponseQueueNumb',
                     "blockType": "reporter",
-                    "text": 'Packet Response Queue Number'
+                    "text": 'Packet Response Queue Number for [CMD]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+					},
                 },
 			]
         };
@@ -210,32 +220,46 @@ class Networking {
 	
 	waitForResponse({CMD}) {
 		if (this.isRunning) {
-			if (this.got_response == 1) {
-				this.got_response = 0;
-				return true;
-			}
-			if (!this.listening_for_packet) {
-				this.listening_for_packet = true;
-				this.listening_packet_cmd = String(CMD);
-				console.log("Registering new listener: ", String(CMD));
+			if (!(String(CMD) in this.listening_for_packet)) { // check if the event is not in the current listeners json object
+				this.listening_for_packet[String(CMD)] = {"returned": false, "val": "", "queue": -1}; // create listener
+				console.log("Registering new listener: ", String(CMD)); // alert console for the new event
+				return false; // tell scratch we are going to start listening
+			} else if (this.listening_for_packet[String(CMD)]["returned"]) { // networking code tells us that the event was handled
+				this.listening_for_packet[String(CMD)]["returned"] = false; // reset listener
+				console.log("Resetting listener: ", String(CMD)); // alert console for the event being reset
+				return true; // tell scratch the event was handled
+			} else {
+				return false; // event is still listening
 			};
-			return false;
 		} else {
 			return false;
 		};
 	};
 	
-	getPacketResponse() {
-		try {
-			return JSON.stringify(this.responded_packet);
-		} catch(err) {
-			console.log(err);
+	getPacketResponse({CMD}) {
+		if (this.isRunning) {
+			try {
+				return JSON.stringify(this.listening_for_packet[String(CMD)]["val"]);
+			} catch(err) {
+				console.log(err);
+				return "";
+			};
+		} else {
 			return "";
 		};
 	};
 	
-	getPacketResponseQueueNumb() {
-		return this.packet_response_queue_number;
+	getPacketResponseQueueNumb({CMD}) {
+		if (this.isRunning) {
+			try {
+				return this.listening_for_packet[String(CMD)]["queue"];
+			} catch(err) {
+				console.log(err);
+				return "";
+			};
+		} else {
+			return "";
+		};
 	}
 	
 	linkState() {
@@ -370,32 +394,27 @@ class Networking {
    				self.socketData = JSON.parse(event.data);
 				self.packet_hat = 0;
 				
-				if (self.listening_for_packet) {
-					if (String(self.listening_packet_cmd) == String(self.socketData["cmd"])) {
-						self.got_response = 1;
-						self.responded_packet = self.socketData;
-						console.log("GOT RESPONSE FOR CMD", String(self.listening_packet_cmd), ": ", self.socketData);
-						self.listening_for_packet = false;
-						self.listening_packet_cmd = "";
-						self.packet_response_queue_number = (Number(Object.keys(self.packet_queue).length) + 1);
+				if (String(self.socketData["cmd"]) in self.listening_for_packet) { // Handles event listeners
+					if (!(self.listening_for_packet[String(self.socketData["cmd"])]["returned"])) { // if command hasn't been returned
+						self.listening_for_packet[String(self.socketData["cmd"])]["val"] = self.socketData; // set the data output
+						self.listening_for_packet[String(self.socketData["cmd"])]["returned"] = true; // update the listener to become true
+						self.listening_for_packet[String(self.socketData["cmd"])]["queue"] = (Number(Object.keys(self.packet_queue).length) + 1); // update queue #
+						console.log("GOT RESPONSE FOR CMD", String(self.socketData["cmd"]), ": ", self.listening_for_packet[String(self.socketData["cmd"])]);
 					};
 				};
+				
 				self.packet_queue[String(Number(Object.keys(self.packet_queue).length) + 1)] = self.socketData;
 				console.log(self.packet_queue);
    				console.log("RECEIVED:", self.socketData);
    			};
 			this.mWS.onclose = function() {
-				this.isRunning = false;
-				this.connect_hat = 0;
-				this.packet_hat = 0;
-				this.close_hat = 0;
-				this.link_status = 3;
-				this.packet_queue = {};
-				this.responded_packet = {};
-				this.got_response = 0;
-				this.listening_for_packet = false;
-				this.listening_packet_cmd = "";
-				this.packet_response_queue_number = 0;
+				self.isRunning = false;
+				self.connect_hat = 0;
+				self.packet_hat = 0;
+				self.close_hat = 0;
+				self.link_status = 3;
+				self.packet_queue = {};
+				self.listening_for_packet = {};
 				console.log("Server has disconnected.");
 			};
     	} else {
@@ -413,11 +432,7 @@ class Networking {
     		this.isRunning = false;
 			this.link_status = 3;
 			this.packet_queue = {};
-			this.responded_packet = {};
-			this.got_response = 0;
-			this.listening_for_packet = false;
-			this.listening_packet_cmd = "";
-			this.packet_response_queue_number = 0;
+			this.listening_for_packet = {};
     	} else {
     		console.log("Socket is not open.");
     	};
@@ -434,11 +449,7 @@ class Networking {
 				this.close_hat = 0;
 				this.link_status = 3;
 				this.packet_queue = {};
-				this.responded_packet = {};
-				this.got_response = 0;
-				this.listening_for_packet = false;
-				this.listening_packet_cmd = "";
-				this.packet_response_queue_number = 0;
+				this.listening_for_packet = {};
    				console.log("Server has disconnected.")
    			};
    		};
