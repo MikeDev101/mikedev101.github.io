@@ -13,6 +13,7 @@ class Networking {
 
 		this.packet_queue = {};
 		this.listening_for_packet = {};
+		this.specific_packet_listener = {};
     }
 
     getInfo () {
@@ -135,6 +136,26 @@ class Networking {
                     }
                 },
 				{
+                	"opcode": 'sendDataWithResponse',
+                    "blockType": "command",
+                    "text": 'Send [DATA] and wait for response CMD: [CMD] Listener ID: [ID]',
+					"blockAllThreads": "true",
+                    "arguments": {
+                        "DATA": {
+                            "type": "string",
+                            "defaultValue": '{"foo": "bar"}'
+                        },
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+						"ID": {
+							"type": "string",
+							"defaultValue": 'listen0',
+						},
+                    }
+                },
+				{
                     "opcode": 'openSocket',
                     "blockType": "command",
                     "text": 'Connect to [ADDRESS]',
@@ -159,13 +180,58 @@ class Networking {
                     "text": 'Clear Packet Queue',
                 },
 				{
-                	"opcode": 'waitForResponse',
-                    "blockType": "Boolean",
-					"text": 'Listen for packet with cmd: [CMD]',
+                	"opcode": 'registerNewListener',
+                    "blockType": "command",
+					"text": 'Create new listener for CMD: [CMD] Listener ID: [ID]',
 					"arguments": {
 						"CMD": {
 							"type": "string",
 							"defaultValue": 'statuscode',
+						},
+						"ID": {
+							"type": "string",
+							"defaultValue": 'listen0',
+						},
+					},
+                },
+				{
+                	"opcode": 'resetListener',
+                    "blockType": "command",
+					"text": 'Reset listener for CMD: [CMD] Listener ID: [ID]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+						"ID": {
+							"type": "string",
+							"defaultValue": 'listen0',
+						},
+					},
+                },
+				{
+                	"opcode": 'waitForResponse',
+                    "blockType": "Boolean",
+					"text": 'Listen for packet with CMD: [CMD]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+					},
+                },
+				{
+                	"opcode": 'waitForListenerResponse',
+                    "blockType": "Boolean",
+					"text": 'Listen for packet for CMD: [CMD] Listener ID: [ID]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+						"ID": {
+							"type": "string",
+							"defaultValue": 'listen0',
 						},
 					},
                 },
@@ -206,9 +272,59 @@ class Networking {
 						},
 					},
                 },
+				{
+                	"opcode": 'getListenerPacketResponse',
+                    "blockType": "reporter",
+                    "text": 'Listener Response for CMD: [CMD] Listener ID: [ID]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+						"ID": {
+							"type": "string",
+							"defaultValue": 'listen0',
+						},
+					},
+                },
+				{
+                	"opcode": 'getListenerPacketResponseQueueNumb',
+                    "blockType": "reporter",
+                    "text": 'Listener Response Queue Number for CMD: [CMD] Listener ID: [ID]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						},
+						"ID": {
+							"type": "string",
+							"defaultValue": 'listen0',
+						},
+					},
+                },
 			]
         };
     };
+	
+	registerNewListener({CMD, ID}) {
+		if (this.isRunning) {
+			if (!(String(CMD) in this.specific_packet_listener)) {
+				this.specific_packet_listener[String(CMD)] = {};
+			};
+			if (!(String(ID) in this.specific_packet_listener[String(CMD)])) {
+				this.specific_packet_listener[String(CMD)][String(ID)] = {"returned": false, "val": "", "queue": -1};
+				console.log("Registered new listener:", String(ID));
+			};
+		};
+	};
+	
+	resetListener({CMD, ID}) {
+		if (this.isRunning) {
+			if ((String(CMD) in this.specific_packet_listener) && (String(ID) in this.specific_packet_listener[String(CMD)])) {
+				this.specific_packet_listener[String(CMD)][String(ID)]["returned"] = false;
+			};
+		};
+	};
 	
 	checkJSONforValue({JSON_STRING, VALUE}) {
 		try {
@@ -216,32 +332,72 @@ class Networking {
 		} catch(err) {
 			return false;
 		};
-	}
+	};
 	
 	waitForResponse({CMD}) {
 		if (this.isRunning) {
-			if (!(String(CMD) in this.listening_for_packet)) { // check if the event is not in the current listeners json object
-				this.listening_for_packet[String(CMD)] = {"returned": false, "val": "", "queue": -1}; // create listener
-				console.log("Registering new listener: ", String(CMD)); // alert console for the new event
-				return false; // tell scratch we are going to start listening
-			} else if (this.listening_for_packet[String(CMD)]["returned"]) { // networking code tells us that the event was handled
-				this.listening_for_packet[String(CMD)]["returned"] = false; // reset listener
-				console.log("Resetting listener: ", String(CMD)); // alert console for the event being reset
-				return true; // tell scratch the event was handled
+			if (!(String(CMD) in this.listening_for_packet)) {
+				this.listening_for_packet[String(CMD)] = {"returned": false, "val": "", "queue": -1};
+				return false;
+			} else if (this.listening_for_packet[String(CMD)]["returned"]) {
+				this.listening_for_packet[String(CMD)]["returned"] = false;
+				return true;
 			} else {
-				return false; // event is still listening
+				return false;
 			};
 		} else {
 			return false;
 		};
 	};
 	
+	waitForListenerResponse({CMD, ID}) {
+		if (this.isRunning) {
+			if ((String(CMD) in this.specific_packet_listener) && (String(ID) in this.specific_packet_listener[String(CMD)])) {
+				if (this.specific_packet_listener[String(CMD)][String(ID)]["returned"]) {
+					return true;
+				} else {
+					return false;
+				};
+			} else {
+				return false;
+			};
+		} else {
+			return false;
+		}
+	};
+	
+	getListenerPacketResponse({CMD, ID}) {
+		if (this.isRunning) {
+			try {
+				return JSON.stringify(this.specific_packet_listener[String(CMD)][String(ID)]["val"]);
+			} catch(err) {
+				// console.log(err);
+				return "";
+			};
+		} else {
+			return "";
+		};
+	};
+	
+	getListenerPacketResponseQueueNumb({CMD, ID}) {
+		if (this.isRunning) {
+			try {
+				return this.specific_packet_listener[String(CMD)][String(ID)]["queue"];
+			} catch(err) {
+				// console.log(err);
+				return "";
+			};
+		} else {
+			return "";
+		};
+	}
+	
 	getPacketResponse({CMD}) {
 		if (this.isRunning) {
 			try {
 				return JSON.stringify(this.listening_for_packet[String(CMD)]["val"]);
 			} catch(err) {
-				console.log(err);
+				// console.log(err);
 				return "";
 			};
 		} else {
@@ -254,7 +410,7 @@ class Networking {
 			try {
 				return this.listening_for_packet[String(CMD)]["queue"];
 			} catch(err) {
-				console.log(err);
+				// console.log(err);
 				return "";
 			};
 		} else {
@@ -270,7 +426,7 @@ class Networking {
 		try {
 			return JSON.stringify(this.packet_queue[args.item]);
 		} catch(err) {
-			console.log(err);
+			// console.log(err);
 			return "";
 		};
 	};
@@ -374,14 +530,13 @@ class Networking {
 	}) {
     	if (this.isRunning == false) {
     		console.log("Starting socket.");
-			const self = this; // the functions below are out of the scope
+			const self = this;
 			self.link_status = 1;
     		this.mWS = new WebSocket(String(ADDRESS));
     		
-    		//check if connnecting to the server fails
     		this.mWS.onerror = function(){
     			self.isRunning = false;
-    			console.log("failed to connect to the server.");
+				console.log("failed to connect to the server.");
 				self.link_status = 3;
     		};
     		this.mWS.onopen = function(){
@@ -394,17 +549,27 @@ class Networking {
    				self.socketData = JSON.parse(event.data);
 				self.packet_hat = 0;
 				
-				if (String(self.socketData["cmd"]) in self.listening_for_packet) { // Handles event listeners
-					if (!(self.listening_for_packet[String(self.socketData["cmd"])]["returned"])) { // if command hasn't been returned
-						self.listening_for_packet[String(self.socketData["cmd"])]["val"] = self.socketData; // set the data output
-						self.listening_for_packet[String(self.socketData["cmd"])]["returned"] = true; // update the listener to become true
-						self.listening_for_packet[String(self.socketData["cmd"])]["queue"] = (Number(Object.keys(self.packet_queue).length) + 1); // update queue #
-						console.log("GOT RESPONSE FOR CMD", String(self.socketData["cmd"]), ": ", self.listening_for_packet[String(self.socketData["cmd"])]);
+				if (String(self.socketData["cmd"]) in self.listening_for_packet) {
+					if (!(self.listening_for_packet[String(self.socketData["cmd"])]["returned"])) {
+						self.listening_for_packet[String(self.socketData["cmd"])]["val"] = self.socketData;
+						self.listening_for_packet[String(self.socketData["cmd"])]["returned"] = true;
+						self.listening_for_packet[String(self.socketData["cmd"])]["queue"] = (Number(Object.keys(self.packet_queue).length) + 1);
+						console.log("GOT RESPONSE FOR", String(self.socketData["cmd"]), ":", self.socketData);
+					};
+				};
+				
+				if (String(self.socketData["cmd"]) in self.specific_packet_listener) {
+					for (const listener in self.specific_packet_listener[String(self.socketData["cmd"])]) {
+						if (!(self.specific_packet_listener[String(self.socketData["cmd"])][listener]["returned"])) {
+							self.specific_packet_listener[String(self.socketData["cmd"])][listener]["val"] = self.socketData;
+							self.specific_packet_listener[String(self.socketData["cmd"])][listener]["returned"] = true;
+							self.specific_packet_listener[String(self.socketData["cmd"])][listener]["queue"] = (Number(Object.keys(self.packet_queue).length) + 1);
+							console.log("GOT RESPONSE FOR LISTENER", String(listener), ":", self.socketData);
+						};
 					};
 				};
 				
 				self.packet_queue[String(Number(Object.keys(self.packet_queue).length) + 1)] = self.socketData;
-				console.log(self.packet_queue);
    				console.log("RECEIVED:", self.socketData);
    			};
 			this.mWS.onclose = function() {
@@ -450,7 +615,7 @@ class Networking {
 				this.link_status = 3;
 				this.packet_queue = {};
 				this.listening_for_packet = {};
-   				console.log("Server has disconnected.")
+   				// console.log("Server has disconnected.")
    			};
    		};
    		return this.isRunning;
@@ -462,6 +627,30 @@ class Networking {
    			console.log("SENT:", args.DATA);
    		};
    	};
+	
+	sendDataWithResponse({DATA, CMD, ID}) {
+		if (this.isRunning) {
+			// Create listener if not already created
+			if (!(String(CMD) in this.specific_packet_listener)) {
+				this.specific_packet_listener[String(CMD)] = {};
+			};
+			if (!(String(ID) in this.specific_packet_listener[String(CMD)])) {
+				this.specific_packet_listener[String(CMD)][String(ID)] = {"returned": false, "val": "", "queue": -1};
+				console.log("Registered new listener:", String(ID));
+			} else if ((String(CMD) in this.specific_packet_listener) && (String(ID) in this.specific_packet_listener[String(CMD)])) {
+				// Reset listener if already created
+				this.specific_packet_listener[String(CMD)][String(ID)]["returned"] = false;
+			};
+			
+			// Send payload
+			this.mWS.send(DATA);
+   			console.log("SENT:", DATA);
+			
+			// Very shitty for response thing
+			
+		
+		};
+	};
 
    	getSocketData() {
    		//Check is the server is still running
