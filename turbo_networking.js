@@ -116,7 +116,18 @@ class Networking {
 				{
                 	"opcode": 'onPacket',
                     "blockType": "hat",
-                    "text": 'On New Data',
+                    "text": 'On New Socket Data',
+                },
+				{
+                	"opcode": 'onPacketWithCMD',
+                    "blockType": "hat",
+					"text": 'On New Socket Data with CMD: [CMD]',
+					"arguments": {
+						"CMD": {
+							"type": "string",
+							"defaultValue": 'statuscode',
+						}
+                    }
                 },
 				{
                 	"opcode": 'onClose',
@@ -138,7 +149,7 @@ class Networking {
 				{
                 	"opcode": 'sendDataWithResponse',
                     "blockType": "command",
-                    "text": 'Send [DATA] and wait for response CMD: [CMD] Listener ID: [ID]',
+                    "text": 'Send [DATA] for listener CMD: [CMD] Listener ID: [ID]',
 					"blockAllThreads": "true",
                     "arguments": {
                         "DATA": {
@@ -353,11 +364,7 @@ class Networking {
 	waitForListenerResponse({CMD, ID}) {
 		if (this.isRunning) {
 			if ((String(CMD) in this.specific_packet_listener) && (String(ID) in this.specific_packet_listener[String(CMD)])) {
-				if (this.specific_packet_listener[String(CMD)][String(ID)]["returned"]) {
-					return true;
-				} else {
-					return false;
-				};
+				return (this.specific_packet_listener[String(CMD)][String(ID)]["returned"]);
 			} else {
 				return false;
 			};
@@ -488,6 +495,22 @@ class Networking {
 		};
 	};
 	
+	onPacketWithCMD({CMD}) {
+		if (this.isRunning) {
+			if (!(String(CMD) in this.listening_for_packet)) {
+				this.listening_for_packet[String(CMD)] = {"returned": false, "val": "", "queue": -1};
+				return false;
+			} else if (this.listening_for_packet[String(CMD)]["returned"]) {
+				this.listening_for_packet[String(CMD)]["returned"] = false;
+				return true;
+			} else {
+				return false;
+			};
+		} else {
+			return false;
+		};
+	};
+	
 	onConnect() {
 		if (this.connect_hat == 0 && this.isRunning) {
 			this.connect_hat = 1;
@@ -558,13 +581,15 @@ class Networking {
 					};
 				};
 				
-				if (String(self.socketData["cmd"]) in self.specific_packet_listener) {
-					for (const listener in self.specific_packet_listener[String(self.socketData["cmd"])]) {
-						if (!(self.specific_packet_listener[String(self.socketData["cmd"])][listener]["returned"])) {
-							self.specific_packet_listener[String(self.socketData["cmd"])][listener]["val"] = self.socketData;
-							self.specific_packet_listener[String(self.socketData["cmd"])][listener]["returned"] = true;
-							self.specific_packet_listener[String(self.socketData["cmd"])][listener]["queue"] = (Number(Object.keys(self.packet_queue).length) + 1);
-							console.log("GOT RESPONSE FOR LISTENER", String(listener), ":", self.socketData);
+				if (String(self.socketData["cmd"]) in self.specific_packet_listener){
+					if ("listener" in self.socketData) {
+						if (String(self.socketData["listener"]) in self.specific_packet_listener[String(self.socketData["cmd"])]) {
+							if (!(self.specific_packet_listener[String(self.socketData["cmd"])][String(self.socketData["listener"])]["returned"])) {
+								self.specific_packet_listener[String(self.socketData["cmd"])][String(self.socketData["listener"])]["val"] = self.socketData;
+								self.specific_packet_listener[String(self.socketData["cmd"])][String(self.socketData["listener"])]["returned"] = true;
+								self.specific_packet_listener[String(self.socketData["cmd"])][String(self.socketData["listener"])]["queue"] = (Number(Object.keys(self.packet_queue).length) + 1);
+								console.log("GOT RESPONSE FOR LISTENER", String(self.socketData["listener"]), ":", self.socketData);
+							};
 						};
 					};
 				};
@@ -576,10 +601,14 @@ class Networking {
 				self.isRunning = false;
 				self.connect_hat = 0;
 				self.packet_hat = 0;
-				self.close_hat = 0;
+				if (self.close_hat == 1) {
+					self.close_hat = 0;
+				};
+				self.socketData = "";
 				self.link_status = 3;
 				self.packet_queue = {};
 				self.listening_for_packet = {};
+				self.specific_packet_listener = {};
 				console.log("Server has disconnected.");
 			};
     	} else {
@@ -596,8 +625,10 @@ class Networking {
 			this.close_hat = 0;
     		this.isRunning = false;
 			this.link_status = 3;
+			this.socketData = "";
 			this.packet_queue = {};
 			this.listening_for_packet = {};
+			this.specific_packet_listener = {};
     	} else {
     		console.log("Socket is not open.");
     	};
@@ -611,10 +642,14 @@ class Networking {
    				this.isRunning = false;
 				this.connect_hat = 0;
 				this.packet_hat = 0;
-				this.close_hat = 0;
+				if (this.close_hat == 1) {
+					this.close_hat = 0;
+				};
 				this.link_status = 3;
+				this.socketData = "";
 				this.packet_queue = {};
 				this.listening_for_packet = {};
+				this.specific_packet_listener = {};
    				// console.log("Server has disconnected.")
    			};
    		};
@@ -645,10 +680,6 @@ class Networking {
 			// Send payload
 			this.mWS.send(DATA);
    			console.log("SENT:", DATA);
-			
-			// Very shitty for response thing
-			
-		
 		};
 	};
 
@@ -662,9 +693,11 @@ class Networking {
     var extensionClass = Networking;
     if (typeof window === "undefined" || !window.vm) {
         Scratch.extensions.register(new extensionClass());
+		console.log("Sandboxed mode detected, performance will suffer because of the extension being sandboxed.");
     } else {
         var extensionInstance = new extensionClass(window.vm.extensionManager.runtime);
         var serviceName = window.vm.extensionManager._registerInternalExtension(extensionInstance);
         window.vm.extensionManager._loadedExtensions.set(extensionInstance.getInfo().id, serviceName);
+		console.log("Unsandboxed mode detected. Good.");
     };
 })()
