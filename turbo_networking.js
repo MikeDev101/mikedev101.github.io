@@ -58,12 +58,36 @@ class Networking {
 					"opcode": 'fetchURL', 
 					"blockType": "reporter",
 					"blockAllThreads": "true",
-					"text": 'Fetch data from URL [url]',
+					"text": 'Fetch data from URL [url] [headers]',
 					"arguments": {
 						"url": {
 							"type": "string",
 							"defaultValue": 'https://mikedev101.github.io/cloudlink/fetch_test',
 						},
+                        "headers": {
+                            "type": "string",
+                            "defaultValue": '{}'
+                        },
+					}
+				},
+                {
+					"opcode": 'postURL', 
+					"blockType": "reporter",
+					"blockAllThreads": "true",
+					"text": 'Post data to URL [url] [data] [headers]',
+					"arguments": {
+						"url": {
+							"type": "string",
+							"defaultValue": 'https://mikedev101.github.io/cloudlink/fetch_test',
+						},
+                        "data": {
+                            "type": "string",
+                            "defaultValue": '{"test": "hello world"}'
+                        },
+                        "headers": {
+                            "type": "string",
+                            "defaultValue": '{}'
+                        },
 					}
 				},
 				{
@@ -521,7 +545,18 @@ class Networking {
 	};
 	
 	fetchURL(args) {
-		return fetch(args.url).then(response => response.text());
+		return fetch(args.url, {
+            method: "GET",
+            headers: JSON.parse(args.headers)
+        }).then(response => response.text());
+	};
+
+    postURL(args) {
+		return fetch(args.url, {
+            method: "POST",
+            body: args.data,
+            headers: JSON.parse(args.headers)
+        }).then(response => response.text());
 	};
 	
 	parseJSON({
