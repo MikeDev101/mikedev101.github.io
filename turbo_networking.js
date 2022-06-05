@@ -66,6 +66,30 @@ class Networking {
 						},
 					}
 				},
+                {
+					"opcode": 'requestURL', 
+					"blockType": "reporter",
+					"blockAllThreads": "true",
+					"text": 'Request URL [method] [url] [data] [headers]',
+					"arguments": {
+                        "method": {
+							"type": "string",
+							"defaultValue": 'GET',
+						},
+						"url": {
+							"type": "string",
+							"defaultValue": 'https://mikedev101.github.io/cloudlink/fetch_test',
+						},
+                        "data": {
+                            "type": "string",
+                            "defaultValue": '{}'
+                        },
+                        "headers": {
+                            "type": "string",
+                            "defaultValue": '{}'
+                        },
+					}
+				},
 				{
                 	"opcode": 'makeJSON',
                     "blockType": "reporter",
@@ -521,7 +545,30 @@ class Networking {
 	};
 	
 	fetchURL(args) {
-		return fetch(args.url).then(response => response.text());
+		return fetch(args.url, {
+            method: "GET"
+        }).then(response => response.text());
+	};
+
+    requestURL(args) {
+        if (args.method == "GET" || args.method == "HEAD") {
+            return fetch(args.url, {
+                method: args.method,
+                headers: JSON.parse(args.headers)
+            }).then(response => response.text());
+        } else {
+            var headers = JSON.parse(args.headers);
+            var form = new FormData();
+            var form_data = JSON.parse(args.data)
+            for (var i=0; i < Object.keys(form_data).length; i++) {
+                form.append(Object.keys(form_data)[i], Object.values(form_data)[i])
+            }
+            return fetch(args.url, {
+                method: args.method,
+                body: form,
+                headers: headers
+            }).then(response => response.text());
+        }
 	};
 	
 	parseJSON({
