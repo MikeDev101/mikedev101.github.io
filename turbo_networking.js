@@ -117,6 +117,21 @@ class Networking {
 					},
 				},
 				{
+					"opcode": 'getFromJSONArray',
+					"blockType": "reporter",
+					"text": 'Get [NUM] from JSON array [ARRAY]',
+					"arguments": {
+						"NUM": {
+							"type": "number",
+							"defaultValue": 1,
+						},
+						"ARRAY": {
+							"type": "string",
+							"defaultValue": "['foo','bar']",
+						}
+					}
+				},
+				{
                 	"opcode": 'isValidJSON',
                     "blockType": "Boolean",
                     "text": 'Is [JSON_STRING] valid JSON?',
@@ -595,6 +610,14 @@ class Networking {
 		};
 	};
 	
+getFromJSONArray({
+	NUM,
+	ARRAY
+}) {
+	var json_array = JSON.parse(ARRAY);
+	return json_array[NUM];
+};
+
     openSocket({
 		ADDRESS
 	}) {
