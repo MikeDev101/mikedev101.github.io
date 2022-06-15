@@ -615,7 +615,11 @@ getFromJSONArray({
 	ARRAY
 }) {
 	var json_array = JSON.parse(ARRAY);
-	return json_array[NUM];
+	if (json_array[NUM] == "undefined")   {
+		return "";
+	} else {
+		return json_array[NUM];
+	}  
 };
 
     openSocket({
