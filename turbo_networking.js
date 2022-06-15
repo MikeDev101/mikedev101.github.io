@@ -123,11 +123,11 @@ class Networking {
 					"arguments": {
 						"NUM": {
 							"type": "number",
-							"defaultValue": 1,
+							"defaultValue": 0,
 						},
 						"ARRAY": {
 							"type": "string",
-							"defaultValue": "['foo','bar']",
+							"defaultValue": '["foo","bar"]',
 						}
 					}
 				},
