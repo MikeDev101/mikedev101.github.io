@@ -615,7 +615,7 @@ getFromJSONArray({
 	ARRAY
 }) {
 	var json_array = JSON.parse(ARRAY);
-	if (json_array[NUM] == "undefined")   {
+	if (json_array[NUM] == "undefined") {
 		return "";
 	} else {
 		return json_array[NUM];
