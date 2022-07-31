@@ -605,7 +605,7 @@ getFromJSONArray({
 	if (json_array[NUM] == "undefined") {
 		return "";
 	} else {
-		return json_array[NUM];
+		return String(json_array[NUM]);
 	}  
 };
 
