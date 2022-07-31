@@ -566,11 +566,18 @@ class Networking {
 	};
 
     requestURL(args) {
-        return fetch(args.url, {
-            method: args.method,
-            headers: JSON.parse(args.headers),
-            body: JSON.parse(args.data)
-        }).then(response => response.text());
+        if (args.method == "GET" || args.method == "HEAD") {
+            return fetch(args.url, {
+                method: args.method,
+                headers: JSON.parse(args.headers)
+            }).then(response => response.text());
+        } else {
+            return fetch(args.url, {
+                method: args.method,
+                headers: JSON.parse(args.headers),
+                body: JSON.parse(args.data)
+            }).then(response => response.text());
+        } 
 	};
 	
 	parseJSON({
