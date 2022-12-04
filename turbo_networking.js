@@ -613,7 +613,7 @@ getFromJSONArray({
 		return "";
 	} else {
 		if (typeof json_array[NUM] === "object") {
-			var json_array = JSON.stringify(json_array[NUM];
+			var json_array = JSON.stringify(json_array[NUM]);
 			return json_array;
 		} else {
 			return json_array[NUM];
