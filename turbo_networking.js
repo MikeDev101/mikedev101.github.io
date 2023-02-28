@@ -612,7 +612,12 @@ getFromJSONArray({
 	if (json_array[NUM] == "undefined") {
 		return "";
 	} else {
-		return String(json_array[NUM]);
+		if (typeof json_array[NUM] === "object") {
+			var json_array = JSON.stringify(json_array[NUM]);
+			return json_array;
+		} else {
+			return json_array[NUM];
+		}
 	}  
 };
 
